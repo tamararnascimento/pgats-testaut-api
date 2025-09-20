@@ -1,0 +1,106 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "E-commerce API",
+    "version": "1.0.0",
+    "description": "API Rest para plataforma de e-commerce com autenticação JWT."
+  },
+  "paths": {
+    "/users/register": {
+      "post": {
+        "summary": "Registrar novo usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["name", "email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuário registrado com sucesso." },
+          "409": { "description": "E-mail já registrado." }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "summary": "Login do usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "login": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login bem-sucedido, retorna token JWT." },
+          "401": { "description": "Credenciais inválidas." }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Consultar usuários",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de usuários." },
+          "401": { "description": "Token não fornecido ou inválido." }
+        }
+      }
+    },
+    "/purchases": {
+      "post": {
+        "summary": "Realizar compra",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "products": { "type": "array", "items": { "type": "integer" } },
+                  "total": { "type": "number" },
+                  "paymentMethod": { "type": "string" }
+                },
+                "required": ["products", "total", "paymentMethod"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Compra realizada com sucesso." },
+          "403": { "description": "Regras de compra não atendidas." },
+          "404": { "description": "Usuário ou produto não encontrado." }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
