@@ -1,4 +1,25 @@
-const users = [];
+let users = [];
+const defaultUsers = [
+    {
+        name: 'Meg',
+        email:'meg@email.com',
+        password: '98765'
+    },
+    {
+        name: 'Fifi',
+        email:'fifi@email.com',
+        password: '23456'
+    },
+    {
+        name: 'Tamara',
+        email:'tamarar@email.com',
+        password: '35791'
+    }
+];
+
+function resetUsers() {
+    users = JSON.parse(JSON.stringify(defaultUsers));
+}
 
 function findByEmail(email) {
     return users.find(u => u.email === email);
@@ -17,3 +38,4 @@ function getAll() {
 }
 
 module.exports = { findByEmail, findByLogin, create, getAll };
+module.exports.resetUsers = resetUsers;
