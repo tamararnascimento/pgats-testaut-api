@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "chai": "^5.3.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mocha": "^11.7.2",
@@ -11,5 +10,8 @@
   },
   "scripts": {
     "test": "mocha test/**/*.test.js"
+  },
+  "devDependencies": {
+    "chai": "^5.3.3"
   }
 }
