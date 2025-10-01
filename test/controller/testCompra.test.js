@@ -1,18 +1,18 @@
-const request = require('supertest');
-const { expect } = require('chai');
-const app = require('../../app');
 
-const jwt = require('jsonwebtoken');
+import request from 'supertest';
+import { expect } from 'chai';
+import app from '../../app.js';
+import jwt from 'jsonwebtoken';
+import userRepository from '../../repository/userRepository.js';
 const SECRET = 'pgats-secret';
 
 describe('Registro de Compra', () => {
 
     let token;
-    const userRepository = require('../../repository/userRepository');
 
     beforeEach(() => {
         userRepository.resetUsers();
-        // Adiciona creditCard ao usuário Meg
+   
         const meg = userRepository.findByEmail('meg@email.com');
         if (meg) {
             meg.creditCard = '1234-5678-9012-3456';
