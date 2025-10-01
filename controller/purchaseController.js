@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const purchaseService = require('../service/purchaseService');
-const authMiddleware = require('../service/authMiddleware');
+import express from 'express';
+import purchaseService from '../service/purchaseService.js';
+import authMiddleware from '../service/authMiddleware.js';
 
+const router = express.Router();
 router.post('/', authMiddleware, purchaseService.makePurchase);
 
-module.exports = router;
+export default router;

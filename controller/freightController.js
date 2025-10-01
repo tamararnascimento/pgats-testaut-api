@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
 
+const router = express.Router();
 
 router.get('/', (req, res) => {
     const { cepOrigem, cepDestino } = req.query;
@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
     if (!cepRegex.test(cepOrigem) || !cepRegex.test(cepDestino) || cepOrigem === '00000-000') {
         return res.status(500).json({ message: 'Erro ao calcular o frete.' });
     }
+
     return res.status(200).json({
         cep: cepOrigem,
         destino: cepDestino,
@@ -16,5 +17,4 @@ router.get('/', (req, res) => {
     });
 });
 
-module.exports = router;
-
+export default router;

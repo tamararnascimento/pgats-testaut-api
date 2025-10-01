@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 const SECRET = 'pgats-secret';
 
 function authMiddleware(req, res, next) {
@@ -15,4 +15,4 @@ function authMiddleware(req, res, next) {
     }
 }
 
-module.exports = authMiddleware;
+export default authMiddleware;

@@ -13,4 +13,4 @@ function getAll() {
     return products;
 }
 
-module.exports = { findById, getAll };
+export default { findById, getAll };

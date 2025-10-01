@@ -1,5 +1,5 @@
-const userRepository = require('../repository/userRepository');
-const jwt = require('jsonwebtoken');
+import userRepository from '../repository/userRepository.js';
+import jwt from 'jsonwebtoken';
 const SECRET = 'pgats-secret';
 
 function register(req, res) {
@@ -29,4 +29,4 @@ function getUsers(req, res) {
     return res.json(users);
 }
 
-module.exports = { register, login, getUsers };
+export default { register, login, getUsers };

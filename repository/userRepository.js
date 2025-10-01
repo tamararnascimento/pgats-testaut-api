@@ -37,5 +37,4 @@ function getAll() {
     return users;
 }
 
-module.exports = { findByEmail, findByLogin, create, getAll };
-module.exports.resetUsers = resetUsers;
+export default { findByEmail, findByLogin, create, getAll, resetUsers };

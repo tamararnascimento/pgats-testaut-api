@@ -1,9 +1,17 @@
-const express = require('express');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
-const userController = require('./controller/userController');
-const purchaseController = require('./controller/purchaseController');
-const freightController = require('./controller/freightController');
+import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+import userController from './controller/userController.js';
+import purchaseController from './controller/purchaseController.js';
+import freightController from './controller/freightController.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const swaggerPath = join(__dirname, 'swagger.json');
+const swaggerDocument = JSON.parse(readFileSync(swaggerPath, 'utf-8'));
 
 const app = express();
 app.use(express.json());
@@ -14,4 +22,4 @@ app.use('/users', userController);
 app.use('/purchases', purchaseController);
 app.use('/freight', freightController);
 
-module.exports = app;
+export default app;

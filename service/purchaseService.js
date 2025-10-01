@@ -1,6 +1,6 @@
-const userRepository = require('../repository/userRepository');
-const productRepository = require('../repository/productRepository');
-const purchaseRepository = require('../repository/purchaseRepository');
+import userRepository from '../repository/userRepository.js';
+import productRepository from '../repository/productRepository.js';
+import purchaseRepository from '../repository/purchaseRepository.js';
 
 function makePurchase(req, res) {
     const { products, total, paymentMethod } = req.body;
@@ -21,4 +21,4 @@ function makePurchase(req, res) {
     return res.status(201).json({ message: 'Compra realizada com sucesso.' });
 }
 
-module.exports = { makePurchase };
+export default { makePurchase };
