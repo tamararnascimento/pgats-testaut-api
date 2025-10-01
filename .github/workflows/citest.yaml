@@ -1,4 +1,3 @@
-# Arquivo de workflow para rodar testes automatizados Node.js no GitHub Actions
 name: CI - Testes API E-commerce
 
 on:
@@ -13,6 +12,14 @@ jobs:
     steps:
       - name: Checkout código
         uses: actions/checkout@v3
+    
+      - name: Cache npm
+        uses: actions/cache@v3
+        with:
+            path: ~/.npm
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-node-
 
       - name: Instalar Node.js
         uses: actions/setup-node@v3
@@ -23,4 +30,6 @@ jobs:
         run: npm install
 
       - name: Rodar testes
-        run: npm test
+        run: |
+          npm test --verbose
+          echo "Status do teste: $?"
